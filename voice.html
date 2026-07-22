@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ボイスサンプル | 地藏 大起 公式HP</title>
+    <style>
+        /* --- 基本設定（共通） --- */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #e5e5e5;
+            overflow: auto; 
+        }
+
+        @keyframes fadeDown {
+            0% { opacity: 0; transform: translateY(-50px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- ヘッダー関連 --- */
+        header {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            z-index: 100;
+        }
+
+        .title {
+            margin: 0;
+            font-size: 24px;
+            color: #333;
+            opacity: 0;
+            animation: fadeDown 1.5s ease forwards;
+        }
+
+        .hamburger {
+            font-size: 32px;
+            color: #333;
+            cursor: pointer;
+            margin-top: 10px;
+            /* ▼ 横並びにして上下中央揃えにするため、inline-flexに変更 ▼ */
+            display: inline-flex; 
+            align-items: center;  /* 上下の中央を揃える */
+            gap: 8px;             /* 「≡」と「メニュー」の間のすき間 */
+            opacity: 0;
+            transition: opacity 0.8s ease;
+            user-select: none;
+        }
+
+        .hamburger.show {
+            opacity: 1;
+        }
+
+        /* ▼ 追加：「メニュー」の文字の大きさと太さを調整 ▼ */
+        .hamburger-text {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        /* --- ナビゲーションメニュー --- */
+        .menu {
+            position: absolute;
+            top: 100px;
+            left: 30px;
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 20px 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 90;
+        }
+
+        .menu.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .menu ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .menu ul li {
+            margin-bottom: 15px;
+        }
+
+        .menu ul li:last-child {
+            margin-bottom: 0;
+        }
+
+        .menu ul li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            font-size: 16px;
+            transition: color 0.2s;
+        }
+
+        .menu ul li a:hover {
+            color: #007BFF;
+        }
+
+        /* --- コンテンツ用のスタイル --- */
+        .content-container {
+            max-width: 800px;
+            width: 85%;
+            margin: 150px auto 50px;
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+            opacity: 0;
+            animation: fadeDown 1.5s ease forwards;
+        }
+
+        .content-container h2 {
+            margin-top: 0;
+            border-bottom: 2px solid #333;
+            padding-bottom: 10px;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        /* --- ▼ ボイスサンプル特有のスタイル ▼ --- */
+        .voice-item {
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #f8f9fa; /* 薄いグレーの背景 */
+            border-radius: 8px;
+            border-left: 6px solid #333; /* 左側にアクセントの線 */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .voice-item h3 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 18px;
+            color: #333;
+        }
+
+        .voice-item p {
+            font-size: 14px;
+            color: #666;
+            margin-top: 0;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        /* オーディオプレイヤーの幅を画面に合わせる */
+        audio {
+            width: 100%;
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1 class="title">地藏 大起（チクラ タイキ）MyWebsites</h1>
+        <div class="hamburger" id="hamburger">≡<span class="hamburger-text">メニュー</span></div>
+    </header>
+
+    <nav class="menu" id="menu">
+        <ul>
+            <li><a href="index.html">トップページへ戻る</a></li>
+            <li><a href="profile.html">プロフィール</a></li>
+            <li><a href="voice.html">ボイスサンプル</a></li>
+            <li><a href="works.html">出演作</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <div class="content-container">
+            <h2>ボイスサンプル</h2>
+            
+            <div class="voice-item">
+                <h3>フリートーク・自己紹介</h3>
+                <p>明るく元気なトーンでの自己紹介です。</p>
+                <audio controls>
+    <source src="sample1.wav" type="audio/wav">
+    <source src="sample1.mp3" type="audio/mpeg">
+    お使いのブラウザは音声再生に対応していません。
+</audio>
+            </div>
+
+            <div class="voice-item">
+                <h3>セリフ（青年・冷静）</h3>
+                <p>仲間に静かに、でも熱く自分の心情を吐露するシーンです</p>
+                <audio controls>
+    <source src="ボイスサンプル1.wav" type="audio/wav">
+    <source src="ボイスサンプル1.mp3" type="audio/mpeg">
+    お使いのブラウザは音声再生に対応していません。
+</audio>
+            </div>
+
+            <div class="voice-item">
+                <h3>セリフ（青年・熱血）</h3>
+                <p>バトルシーンを想定した熱量のあるセリフです。</p>
+                <audio controls>
+    <source src="sample2.wav" type="audio/wav">
+    <source src="sample2.mp3" type="audio/mpeg">
+    お使いのブラウザは音声再生に対応していません。
+</audio>
+            </div>
+
+            <div class="voice-item">
+                <h3>ナレーション（企業VP風）</h3>
+                <p>落ち着いたトーンでのナレーションです。</p>
+                <audio controls>
+    <source src="sample3.wav" type="audio/wav">
+    <source src="sample3.mp3" type="audio/mpeg">
+    お使いのブラウザは音声再生に対応していません。
+</audio>
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const hamburger = document.getElementById('hamburger');
+            const menu = document.getElementById('menu');
+
+            setTimeout(() => {
+                hamburger.classList.add('show');
+            }, 1500);
+
+            hamburger.addEventListener('click', () => {
+                menu.classList.toggle('open');
+            });
+        });
+    </script>
+
+</body>
+</html>
