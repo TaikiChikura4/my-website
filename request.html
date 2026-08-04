@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>出演作 | 地藏 大起 公式HP</title>
+    <title>お仕事依頼 | 地藏 大起 公式HP</title>
     <style>
         /* --- 基本設定（共通） --- */
         body, html {
@@ -22,13 +22,13 @@
 
         /* --- ヘッダー関連 --- */
         header {
-            position: fixed; /* absolute から fixed に変更（スクロールしても上部に固定） */
-            top: 0; /* 画面の一番上に配置 */
-            left: 0; /* 画面の左端から配置 */
-            width: 100%; /* 画面の横幅いっぱいに広げる */
-            background-color: #e5e5e5; /* 変更：メインの場所と同じグレーの色にする */
-            padding: 15px 30px; /* 元の配置に見た目を近づけるための余白（上下15px、左右30px） */
-            box-sizing: border-box; /* 横幅が画面からはみ出さないための設定 */
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            background-color: #e5e5e5; 
+            padding: 15px 30px; 
+            box-sizing: border-box; 
             z-index: 100;
         }
 
@@ -67,7 +67,7 @@
             position: absolute;
             top: 100px;
             left: 30px;
-            background-color: #ffffff; /* ← 透過なしの完全な白（#ffffff）に変更しました */
+            background-color: #ffffff; 
             padding: 20px 30px;
             border-radius: 8px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.15);
@@ -131,43 +131,54 @@
             margin-bottom: 30px;
         }
 
-        /* --- ▼ 出演作特有のスタイル ▼ --- */
-        .works-category {
-            margin-bottom: 40px;
+        /* --- ▼ お仕事依頼特有のスタイル ▼ --- */
+        .request-item {
+            margin-bottom: 35px;
+            padding: 25px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            border-left: 6px solid #333; 
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
 
-        .works-category h3 {
+        .request-item h3 {
+            margin-top: 0;
+            margin-bottom: 15px;
             font-size: 20px;
             color: #333;
-            border-left: 5px solid #555; 
-            padding-left: 12px;
-            margin-bottom: 15px;
         }
 
-        .works-list {
-            list-style: none;
-            padding: 0;
+        .request-item p.desc {
+            font-size: 15px;
+            color: #444;
+            margin-top: 0;
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+
+        .request-fee {
             margin: 0;
-        }
-
-        .works-list li {
+            padding-top: 15px;
+            border-top: 1px dashed #ccc;
             font-size: 16px;
-            color: #333;
-            /* ▼ 変更：ここの数値を大きくして、項目ごとの行間（1行分）をあけました ▼ */
-            margin-bottom: 25px; 
-            padding-left: 1.2em;
-            text-indent: -1.2em;
-            line-height: 1.6;
+            color: #222;
         }
-
-        .works-list li::before {
-            content: "・";
-            color: #666;
-        }
-
-        .role {
+        
+        .fee-label {
             font-weight: bold;
+            color: #333;
+        }
+
+        /* 補足・お問い合わせ用のボックス */
+        .contact-note {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: #eeeeee;
+            border-radius: 5px;
+            font-size: 14px;
             color: #555;
+            line-height: 1.6;
+            text-align: center;
         }
     </style>
 </head>
@@ -191,26 +202,43 @@
 
     <main>
         <div class="content-container">
-            <h2>出演作</h2>
+            <h2>お仕事依頼</h2>
             
-            <!-- ▼ 修正箇所：舞台・朗読劇のリストを整理しました ▼ -->
-            <div class="works-category">
-                <h3>舞台・朗読劇</h3>
-                <ul class="works-list">
-                    <li>
-                        朗読劇『花影朗読夜』<br>
-                         『段梯子の恐怖』- <span class="role">友人F 役</span><br>
-                         『殺人の涯』- <span class="role">男 役</span><br>
-                         『卒塔婆小町』- <span class="role">詩人 他多数 役</span><br>
-                    </li>
-                    <li>
-                        劇団ムーンライト朗読劇、舞台<br>
-                         『時計のない村』- <span class="role">金持ち乙 役</span><br>
-                         『夏の葬列』- <span class="role">男 役</span><br>
-                         『私の街の空気』- <span class="role">タツヤ 役</span><br>
-                         『TWINCLE×3』- <span class="role">西野 役</span>
-                    </li>
-                </ul>
+            <div class="request-item">
+                <h3>声優/俳優依頼</h3>
+                <p class="desc">
+                    キャラクターボイス（ゲーム・アニメ・アプリ）、映像作品や舞台への出演、各種ナレーション、朗読劇などを承ります。<br>
+                    熱血系からクールな青年、落ち着いたナレーションなど、様々なトーンや表現に柔軟に対応可能です。
+                </p>
+                <p class="request-fee">
+                    <span class="fee-label">【依頼料の目安】</span> 1案件：〇〇,〇〇〇円〜 / ワード単価：〇〇円〜（要相談）
+                </p>
+            </div>
+
+            <div class="request-item">
+                <h3>Web制作依頼</h3>
+                <p class="desc">
+                    個人・企業向けのホームページ制作、ランディングページ（LP）の構築、デザイン業務などを承ります。<br>
+                    スマートフォンやタブレットにも対応したレスポンシブデザインでの構築が可能です。
+                </p>
+                <p class="request-fee">
+                    <span class="fee-label">【依頼料の目安】</span> 1サイト：〇〇,〇〇〇円〜（規模・仕様により変動）
+                </p>
+            </div>
+
+            <div class="request-item">
+                <h3>ゲーム制作依頼</h3>
+                <p class="desc">
+                    ゲームの企画立案、シナリオ・テキスト作成、スクリプトの実装、UI構築など、ゲーム開発に関する業務を幅広く承ります。
+                </p>
+                <p class="request-fee">
+                    <span class="fee-label">【依頼料の目安】</span> 1案件：〇〇,〇〇〇円〜 / 時給換算：〇,〇〇〇円〜（要相談）
+                </p>
+            </div>
+
+            <div class="contact-note">
+                ※上記の金額や内容はあくまで目安となります。<br>
+                ご予算やスケジュールの都合に合わせて柔軟に対応いたしますので、<br>まずは各種SNSのDM等からお気軽にご相談ください。
             </div>
 
         </div>

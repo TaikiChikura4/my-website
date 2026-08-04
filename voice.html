@@ -22,9 +22,13 @@
 
         /* --- ヘッダー関連 --- */
         header {
-            position: absolute;
-            top: 30px;
-            left: 30px;
+            position: fixed; /* absolute から fixed に変更（スクロールしても上部に固定） */
+            top: 0; /* 画面の一番上に配置 */
+            left: 0; /* 画面の左端から配置 */
+            width: 100%; /* 画面の横幅いっぱいに広げる */
+            background-color: #e5e5e5; /* 変更：メインの場所と同じグレーの色にする */
+            padding: 15px 30px; /* 元の配置に見た目を近づけるための余白（上下15px、左右30px） */
+            box-sizing: border-box; /* 横幅が画面からはみ出さないための設定 */
             z-index: 100;
         }
 
@@ -65,7 +69,7 @@
             position: absolute;
             top: 100px;
             left: 30px;
-            background-color: rgba(255, 255, 255, 0.95);
+            background-color: #ffffff; /* ← 透過なしの完全な白（#ffffff）に変更しました */
             padding: 20px 30px;
             border-radius: 8px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.15);
@@ -174,6 +178,8 @@
             <li><a href="profile.html">プロフィール</a></li>
             <li><a href="voice.html">ボイスサンプル</a></li>
             <li><a href="works.html">出演作</a></li>
+            <!-- ▼ メニューにお仕事依頼を追加 ▼ -->
+            <li><a href="request.html">お仕事依頼</a></li>
         </ul>
     </nav>
 
