@@ -239,9 +239,19 @@
                 hamburger.classList.add('show');
             }, 1500);
 
+            // ハンバーガーボタンをクリックした時の処理（開閉）
             hamburger.addEventListener('click', () => {
                 menu.classList.toggle('open');
             });
+
+            // ▼ 追加：画面のどこかをクリックした時にメニューを閉じる処理 ▼
+            document.addEventListener('click', (event) => {
+                // メニューが開いている状態で、クリックした場所が「メニュー本体」でも「ハンバーガーボタン」でもない場合に閉じる
+                if (menu.classList.contains('open') && !menu.contains(event.target) && !hamburger.contains(event.target)) {
+                    menu.classList.remove('open');
+                }
+            });
+            // ▲ 追加ここまで ▲
         });
     </script>
 
