@@ -236,52 +236,65 @@
 
         /* --- ▼ スマホなど画面が狭い時の調整 ▼ --- */
         @media (max-width: 768px) {
-            main {
-                display: block; /* ←追加：画面が狭い時に写真の上部が見切れるのを完全に防ぎます */
-            }
-            .main-content-wrapper {
-                flex-direction: column; /* 縦並びに変更 */
-                align-items: center;
-                gap: 20px;
-                margin-top: 120px; /* 上のヘッダーと写真が被らないようにする余白 */
-                margin-bottom: 160px; /* ←変更：座右の銘とSNSを置くスペースを広めに確保 */
-                position: static; /* ←追加：SNSボタンの配置基準をページ全体にするため */
-                width: 100%; /* ←追加 */
-            }
-            .main-image {
-                max-width: 85vw;
-                max-height: 70vh;
-            }
-            .social-links {
-                position: absolute; /* ←変更：一番下に固定するためabsoluteに変更 */
-                top: auto; /* ←追加：PC用の設定を解除 */
-                bottom: 30px; /* ←追加：ページの一番下に配置 */
-                left: 0; /* ←追加 */
-                width: 100%; /* ←追加 */
-                justify-content: center; /* ←追加：ボタンを中央揃え */
-                transform: none;
-                margin-left: 0;
-                flex-direction: row; /* スマホではボタンを横並びに */
+            /* スクロールに合わせてページが下まで自然に伸びるようにする */
+            body, html {
+                height: auto;
+                min-height: 100vh;
             }
             
-            /* ▼ 追加：座右の銘のスマホ対応（写真に被らないよう画面下部に横並び配置） ▼ */
+            /* ページ全体を上から順に並べ替えられる設定（フレックスボックス）にする */
+            body {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            /* mainとwrapperの枠組みを透明化し、中身（画像やSNS）を直接並べ替えに参加させる */
+            main, .main-content-wrapper {
+                display: contents; 
+            }
+
+            /* ① 1番目：プロフィール画像 */
+            .main-image {
+                order: 1; /* 1番目に表示 */
+                margin-top: 120px; /* ヘッダーを避けるための上の余白 */
+                margin-bottom: 40px; /* 下（座右の銘）とのすき間 */
+                max-width: 85vw;
+                height: auto; /* 縦横比を綺麗に保つ */
+                max-height: none; /* PC版の高さ制限を解除 */
+            }
+
+            /* ② 2番目：座右の銘 */
             .mottos {
-                top: auto;
-                bottom: 110px; /* ←変更：SNSボタンのすぐ上に配置するため数値を調整 */
-                left: 0;
+                order: 2; /* 2番目に表示 */
+                position: static; /* 重なり（絶対配置）を完全に解除し、自然な流れに配置 */
                 width: 100%;
                 max-width: 100%;
                 flex-direction: row;
                 justify-content: center;
-                flex-wrap: wrap; /* 画面からはみ出る場合は折り返す */
+                flex-wrap: wrap; 
                 gap: 15px;
                 padding: 0 10px;
                 box-sizing: border-box;
+                margin-bottom: 40px; /* 下（SNSボタン）とのすき間 */
             }
-            .motto1 { font-size: 12px; }
-            .motto2 { font-size: 14px; }
-            .motto3 { font-size: 13px; }
-            /* ▲ 追加ここまで ▲ */
+
+            /* ③ 3番目：SNSボタン（𝕏とInstagram） */
+            .social-links {
+                order: 3; /* 3番目に表示 */
+                position: static; /* 重なり（絶対配置）を完全に解除し、自然な流れに配置 */
+                width: 100%;
+                flex-direction: row; /* 横並びに */
+                justify-content: center; /* 中央寄せ */
+                transform: none; /* PC用のズレ補正をリセット */
+                margin-left: 0;
+                margin-bottom: 50px; /* 画面の一番下の余白 */
+            }
+
+            /* スマホ用のフォントサイズ微調整 */
+            .motto1 { font-size: 13px; }
+            .motto2 { font-size: 15px; }
+            .motto3 { font-size: 14px; }
         }
     </style>
 </head>
