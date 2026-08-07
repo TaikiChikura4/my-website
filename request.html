@@ -67,7 +67,7 @@
             position: absolute;
             top: 100px;
             left: 30px;
-            background-color: #ffffff; 
+            background-color: #ffffff; /* ← 透過なしの完全な白（#ffffff）に変更しました */
             padding: 20px 30px;
             border-radius: 8px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.15);
@@ -75,7 +75,7 @@
             visibility: hidden;
             transform: translateY(-10px);
             transition: all 0.3s ease;
-            z-index: 90;
+            z-index: 999; /* ←変更：90から999にして最も手前に表示されるようにしました */
         }
 
         .menu.open {
