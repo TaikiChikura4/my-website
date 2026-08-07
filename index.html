@@ -12,7 +12,7 @@
             height: 100%;
             font-family: 'Helvetica Neue', Arial, sans-serif;
             background-color: #e5e5e5;
-            overflow: hidden; 
+            overflow: auto; /* ←変更：hiddenからautoにしてスクロール可能にしました */
         }
 
         /* --- アニメーションの定義 --- */
@@ -82,7 +82,7 @@
             visibility: hidden;
             transform: translateY(-10px);
             transition: all 0.3s ease;
-            z-index: 90;
+            z-index: 999; /* ←変更：90から999にして最も手前に表示されるようにしました */
         }
 
         .menu.open {
@@ -170,7 +170,7 @@
 
         /* --- メインコンテンツ --- */
         main {
-            height: 100%;
+            min-height: 100vh; /* ←変更：heightからmin-heightに変更し、枠が伸びるようにしました */
             display: flex;
             justify-content: center; 
             align-items: center;     
@@ -239,6 +239,8 @@
                 flex-direction: column; /* 縦並びに変更 */
                 align-items: center;
                 gap: 20px;
+                margin-top: 120px; /* ←追加：上のヘッダーと写真が被らないようにする余白 */
+                margin-bottom: 50px; /* ←追加：下までスクロールした時に見切れないようにする余白 */
             }
             .main-image {
                 max-width: 85vw;
