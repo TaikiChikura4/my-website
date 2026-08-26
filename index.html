@@ -295,6 +295,11 @@
             .motto1 { font-size: 13px; }
             .motto2 { font-size: 15px; }
             .motto3 { font-size: 14px; }
+
+            /* ▼ 追加：スマホ版では改行を無効にする ▼ */
+            .pc-br {
+                display: none;
+            }
         }
     </style>
 </head>
@@ -318,7 +323,7 @@
     <!-- ▼ 追加：座右の銘 ▼ -->
     <div class="mottos">
         <div class="motto motto1">信じればいつか夢は叶う</div>
-        <div class="motto motto2">真の集中力とは怒りと平静心の間</div>
+        <div class="motto motto2">真の集中力とは<br class="pc-br">怒りと平静心の間</div>
         <div class="motto motto3">欲望は進化のエネルギー</div>
     </div>
     <!-- ▲ 追加ここまで ▲ -->
