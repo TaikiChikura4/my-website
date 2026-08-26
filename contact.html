@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>お問い合わせフォーム | 地藏 大起 公式HP</title>
+    <style>
+        /* --- 基本設定（共通） --- */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #e5e5e5;
+            overflow: auto; 
+        }
+
+        @keyframes fadeDown {
+            0% { opacity: 0; transform: translateY(-50px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- ヘッダー関連 --- */
+        header {
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            background-color: #e5e5e5; 
+            padding: 15px 30px; 
+            box-sizing: border-box; 
+            z-index: 100;
+        }
+
+        .title {
+            margin: 0;
+            font-size: 24px;
+            color: #333;
+            opacity: 0;
+            animation: fadeDown 1.5s ease forwards;
+        }
+
+        .hamburger {
+            font-size: 32px;
+            color: #333;
+            cursor: pointer;
+            margin-top: 10px;
+            display: inline-flex; 
+            align-items: center;  
+            gap: 8px;             
+            opacity: 0;
+            transition: opacity 0.8s ease;
+            user-select: none;
+        }
+
+        .hamburger.show {
+            opacity: 1;
+        }
+
+        .hamburger-text {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        /* --- ナビゲーションメニュー --- */
+        .menu {
+            position: absolute;
+            top: 100px;
+            left: 30px;
+            background-color: #ffffff; 
+            padding: 20px 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 999; 
+        }
+
+        .menu.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .menu ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .menu ul li {
+            margin-bottom: 15px;
+        }
+
+        .menu ul li:last-child {
+            margin-bottom: 0;
+        }
+
+        .menu ul li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            font-size: 16px;
+            transition: color 0.2s;
+        }
+
+        .menu ul li a:hover {
+            color: #007BFF;
+        }
+
+        /* --- コンテンツ用のスタイル --- */
+        .content-container {
+            max-width: 800px;
+            width: 85%;
+            margin: 150px auto 50px;
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+            opacity: 0;
+            animation: fadeDown 1.5s ease forwards;
+        }
+
+        .content-container h2 {
+            margin-top: 0;
+            border-bottom: 2px solid #333;
+            padding-bottom: 10px;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        /* --- ▼ お問い合わせフォーム特有のスタイル ▼ --- */
+        .form-group {
+            display: flex;
+            margin-bottom: 25px;
+            align-items: flex-start; /* 上揃え */
+        }
+
+        .form-label {
+            flex: 0 0 35%; /* 左側のラベル幅を固定 */
+            font-weight: bold;
+            color: #333;
+            padding-top: 10px; /* 入力欄との縦位置調整 */
+            padding-right: 15px;
+            box-sizing: border-box;
+        }
+
+        .form-input {
+            flex: 1; /* 右側の入力欄を残り幅いっぱいに */
+        }
+
+        .form-input input[type="text"],
+        .form-input input[type="email"],
+        .form-input input[type="tel"],
+        .form-input input[type="url"],
+        .form-input textarea,
+        .form-input select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+            font-family: inherit;
+        }
+
+        /* 複数選択プルダウンの高さ調整 */
+        .form-input select {
+            height: auto;
+            min-height: 90px;
+            padding: 5px;
+        }
+
+        .form-input select option {
+            padding: 8px;
+            margin-bottom: 2px;
+        }
+
+        .form-input textarea {
+            resize: vertical; /* 縦方向のみサイズ変更可能に */
+        }
+
+        .note {
+            font-size: 13px;
+            color: #666;
+            margin-top: 8px;
+            line-height: 1.4;
+        }
+
+        .form-submit {
+            text-align: center;
+            margin-top: 40px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .form-submit button {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 15px 50px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .form-submit button:hover:not(:disabled) {
+            background-color: #555;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+        }
+
+        /* 追加：無効化されたボタンのスタイル */
+        .form-submit button:disabled {
+            background-color: #aaa;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        /* 追加：確認画面用のスタイル */
+        .confirm-item {
+            margin-bottom: 20px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+        .confirm-label {
+            font-weight: bold;
+            color: #555;
+            margin-bottom: 5px;
+        }
+        .confirm-value {
+            color: #333;
+            white-space: pre-wrap; /* 改行を反映 */
+        }
+        
+        #confirmScreen {
+            display: none; /* 初期状態では非表示 */
+        }
+        
+        /* 送信完了画面用のスタイル */
+        #completeScreen {
+            display: none;
+            text-align: center;
+        }
+        #completeScreen h2 {
+            border-bottom: none;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        #completeScreen p {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 40px;
+        }
+
+        /* スマホ向けレスポンシブデザイン（縦並びに変更） */
+        @media (max-width: 768px) {
+            .form-group {
+                flex-direction: column;
+            }
+            .form-label {
+                flex: none;
+                width: 100%;
+                margin-bottom: 8px;
+                padding-top: 0;
+            }
+            .content-container {
+                padding: 25px;
+            }
+            .form-submit {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1 class="title">地藏 大起（チクラ タイキ）MyWebsites</h1>
+        <div class="hamburger" id="hamburger">≡<span class="hamburger-text">メニュー</span></div>
+    </header>
+
+    <nav class="menu" id="menu">
+        <ul>
+            <li><a href="index.html">トップページへ戻る</a></li>
+            <li><a href="profile.html">プロフィール</a></li>
+            <li><a href="voice.html">ボイスサンプル</a></li>
+            <li><a href="works.html">出演作</a></li>
+            <li><a href="request.html">お仕事依頼</a></li>
+            <li><a href="contact.html">お問い合わせフォーム</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <div class="content-container">
+            
+            <!-- ▼ 入力画面 ▼ -->
+            <div id="inputScreen">
+                <h2>お問い合わせフォーム</h2>
+                <!-- ▼変更箇所：formのaction属性を空にし、onsubmitでJavaScript関数を呼び出すように変更▼ -->
+                <form id="contactForm" action="" method="POST" onsubmit="event.preventDefault(); sendForm();">
+                <!-- ▲変更箇所ここまで▲ -->
+                    
+                    <!-- 1. 会社・組織名 -->
+                    <div class="form-group">
+                        <div class="form-label">
+                            <label for="company">会社・組織名 / Company</label>
+                        </div>
+                        <div class="form-input">
+                            <!-- ▼変更箇所：name属性を元の英語に戻す（GASで扱いやすくするため）▼ -->
+                            <input type="text" id="company" name="company" placeholder="例: 株式会社〇〇" class="required-input">
+                            <!-- ▲変更箇所ここまで▲ -->
+                            <div class="note">（株式会社や有限会社等も記載してください。個人事業主の場合は氏名を入力してください）</div>
+                        </div>
+                    </div>
+                    
+                    <!-- 2. 氏名 -->
+                    <div class="form-group">
+                        <div class="form-label">
+                            <label for="name">氏名 / Name</label>
+                        </div>
+                        <div class="form-input">
+                            <input type="text" id="name" name="name" required placeholder="例: 山田 太郎" class="required-input">
+                        </div>
+                    </div>
+
+                    <!-- 3. 会社・団体URL -->
+                    <div class="form-group">
+                        <div class="form-label">
+                            <label for="url">会社・団体URL / Company URL</label>
+                        </div>
+                        <div class="form-input">
+                            <input type="text" id="url" name="url" placeholder="例: https://example.com" class="required-input">
+                        </div>
+                    </div>
+
+                    <!-- 4. メールアドレス -->
+                    <div class="form-group">
+                        <div class="form-label">
+                            <label for="email">メールアドレス / Mail</label>
+                        </div>
+                        <div class="form-input">
+                            <input type="email" id="email" name="email" required placeholder="例: sample@example.com" class="required-input">
+                        </div>
+                    </div>
+
+                    <!-- 5. 電話番号 -->
+                    <div class="form-group">
+                        <div class="form-label">
+                            <label for="tel">電話番号 / Tel</label>
+                        </div>
+                        <div class="form-input">
+                            <input type="tel" id="tel" name="tel" placeholder="例: 03-1234-5678" class="required-input">
+                        </div>
+                    </div>
+
+                    <!-- 6. お問い合わせ・ご依頼種別 -->
+                    <div class="form-group">
+                        <div class="form-label">
+                            <label for="category">お問い合わせ・ご依頼種別 / Inquiry Category</label>
+                        </div>
+                        <div class="form-input">
+                            <select id="category" name="category" multiple required class="required-input">
+                                <option value="声優/俳優出演依頼">声優/俳優出演依頼</option>
+                                <option value="Web制作依頼（HP）">Web制作依頼（HP）</option>
+                                <option value="ゲーム制作依頼">ゲーム制作依頼</option>
+                            </select>
+                            <div class="note">※複数選択可能です（Windows: Ctrlを押しながらクリック / Mac: commandを押しながらクリック）</div>
+                        </div>
+                    </div>
+
+                    <!-- 7. お問い合わせ内容詳細 -->
+                    <div class="form-group">
+                        <div class="form-label">
+                            <label for="inquiry">お問い合わせ内容詳細 / Inquiry</label>
+                        </div>
+                        <div class="form-input">
+                            <textarea id="inquiry" name="inquiry" rows="10" required class="required-input"></textarea>
+                            <div class="note">※詳細を記載してください</div>
+                        </div>
+                    </div>
+
+                    <!-- 8. ご予算 -->
+                    <div class="form-group">
+                        <div class="form-label">
+                            <label for="budget">ご予算 / Budget</label>
+                        </div>
+                        <div class="form-input">
+                            <input type="text" id="budget" name="budget" placeholder="例: 〇〇円〜〇〇円" class="required-input">
+                        </div>
+                    </div>
+
+                    <!-- 9. 企画・資料の添付URL -->
+                    <div class="form-group">
+                        <div class="form-label">
+                            <label for="proposal">企画・資料の添付URL / Proposal</label>
+                        </div>
+                        <div class="form-input">
+                            <input type="text" id="proposal" name="proposal" placeholder="Google Drive等の共有リンク" class="required-input">
+                        </div>
+                    </div>
+
+                    <!-- 10. 確認ボタン -->
+                    <div class="form-submit">
+                        <button type="button" id="confirmButton" onclick="showConfirmScreen()" disabled>確認</button>
+                    </div>
+
+                
+            </div>
+            <!-- ▲ 入力画面ここまで ▲ -->
+
+            <!-- ▼ 確認画面 ▼ -->
+            <div id="confirmScreen">
+                <h2>入力内容のご確認</h2>
+                <p style="margin-bottom: 30px; color: #555;">以下の内容で送信します。よろしければ「送信」ボタンを押してください。</p>
+                
+                <div id="confirmContent">
+                    <!-- ここにJavaScriptで確認内容が挿入されます -->
+                </div>
+
+                <div class="form-submit">
+                    <button type="button" onclick="backToInput()" style="background-color: #666;">戻る</button>
+                    <!-- ▼変更箇所：type="button"のままにし、JavaScriptから送信処理を行う▼ -->
+                    <button type="button" id="submitButton" onclick="sendForm()">送信</button>
+                    <!-- ▲変更箇所ここまで▲ -->
+                </div>
+            </div>
+            <!-- ▲ 確認画面ここまで ▲ -->
+            
+            <!-- 送信完了画面 -->
+            <div id="completeScreen">
+                <h2>送信完了</h2>
+                <p>お問い合わせいただき、誠にありがとうございます。<br>内容を確認の上、担当者よりご連絡させていただきます。</p>
+                <div class="form-submit">
+                    <button type="button" onclick="location.href='index.html'" style="background-color: #666;">トップページへ戻る</button>
+                </div>
+            </div>
+            
+            </form>
+
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const hamburger = document.getElementById('hamburger');
+            const menu = document.getElementById('menu');
+
+            setTimeout(() => {
+                hamburger.classList.add('show');
+            }, 1500);
+
+            // ハンバーガーボタンをクリックした時の処理（開閉）
+            hamburger.addEventListener('click', () => {
+                menu.classList.toggle('open');
+            });
+
+            // 画面のどこかをクリックした時にメニューを閉じる処理
+            document.addEventListener('click', (event) => {
+                if (menu.classList.contains('open') && !menu.contains(event.target) && !hamburger.contains(event.target)) {
+                    menu.classList.remove('open');
+                }
+            });
+
+            // 必須入力チェックのイベントリスナー設定
+            const inputs = document.querySelectorAll('.required-input');
+            inputs.forEach(input => {
+                input.addEventListener('input', checkFormValidity);
+                if(input.tagName === 'SELECT') {
+                     input.addEventListener('change', checkFormValidity);
+                }
+            });
+        });
+
+        // フォームの入力状態をチェックして確認ボタンを制御する処理
+        function checkFormValidity() {
+            const inputs = document.querySelectorAll('.required-input');
+            const confirmButton = document.getElementById('confirmButton');
+            let allFilled = true;
+
+            inputs.forEach(input => {
+                if (input.tagName === 'SELECT') {
+                    if (input.selectedOptions.length === 0) {
+                        allFilled = false;
+                    }
+                } else if (input.value.trim() === '') {
+                    allFilled = false;
+                }
+            });
+
+            confirmButton.disabled = !allFilled;
+        }
+
+
+        // 確認画面を表示する処理
+        function showConfirmScreen() {
+            // 各項目の値を取得
+            const company = document.getElementById('company').value;
+            const name = document.getElementById('name').value;
+            const url = document.getElementById('url').value;
+            const email = document.getElementById('email').value;
+            const tel = document.getElementById('tel').value;
+            
+            const categorySelect = document.getElementById('category');
+            const selectedCategories = Array.from(categorySelect.selectedOptions).map(opt => opt.value).join('、');
+            
+            const inquiry = document.getElementById('inquiry').value;
+            const budget = document.getElementById('budget').value;
+            const proposal = document.getElementById('proposal').value;
+
+            // 確認画面用のHTMLを生成
+            const confirmHtml = `
+                <div class="confirm-item"><div class="confirm-label">会社・組織名 / Company</div><div class="confirm-value">${company}</div></div>
+                <div class="confirm-item"><div class="confirm-label">氏名 / Name</div><div class="confirm-value">${name}</div></div>
+                <div class="confirm-item"><div class="confirm-label">会社・団体URL / Company URL</div><div class="confirm-value">${url}</div></div>
+                <div class="confirm-item"><div class="confirm-label">メールアドレス / Mail</div><div class="confirm-value">${email}</div></div>
+                <div class="confirm-item"><div class="confirm-label">電話番号 / Tel</div><div class="confirm-value">${tel}</div></div>
+                <div class="confirm-item"><div class="confirm-label">お問い合わせ・ご依頼種別 / Inquiry Category</div><div class="confirm-value">${selectedCategories}</div></div>
+                <div class="confirm-item"><div class="confirm-label">お問い合わせ内容詳細 / Inquiry</div><div class="confirm-value">${inquiry}</div></div>
+                <div class="confirm-item"><div class="confirm-label">ご予算 / Budget</div><div class="confirm-value">${budget}</div></div>
+                <div class="confirm-item"><div class="confirm-label">企画・資料の添付URL / Proposal</div><div class="confirm-value">${proposal}</div></div>
+            `;
+
+            // 画面の切り替え
+            document.getElementById('confirmContent').innerHTML = confirmHtml;
+            document.getElementById('inputScreen').style.display = 'none';
+            document.getElementById('confirmScreen').style.display = 'block';
+            window.scrollTo(0, 0); // 画面上部にスクロール
+        }
+
+        // 入力画面に戻る処理
+        function backToInput() {
+            document.getElementById('confirmScreen').style.display = 'none';
+            document.getElementById('inputScreen').style.display = 'block';
+            window.scrollTo(0, 0);
+        }
+
+        // ▼変更箇所：Google Apps Script (GAS) を用いた送信処理に変更▼
+        async function sendForm() {
+            const submitButton = document.getElementById('submitButton');
+            
+            // ★重要：ここに、後述の手順で取得したGASのウェブアプリURLを貼り付けます★
+            const gasUrl = 'https://script.google.com/macros/s/AKfycbyDh5MsR7H1nUL2lo4IR2ql_lS84nhrfCVdg8OKrUohJF5Q3CGG0xFoFZU1BsVo6bpm/exec';
+            
+            if (gasUrl === 'YOUR_GAS_WEB_APP_URL_HERE') {
+                alert('送信先のURL（GASのURL）が設定されていません。');
+                return;
+            }
+
+            // 二重送信防止
+            submitButton.disabled = true;
+            submitButton.textContent = '送信中...';
+
+            // 送信するデータをJSON形式でまとめる
+            const categorySelect = document.getElementById('category');
+            const selectedCategories = Array.from(categorySelect.selectedOptions).map(opt => opt.value).join('、');
+
+            const postData = {
+                company: document.getElementById('company').value,
+                name: document.getElementById('name').value,
+                url: document.getElementById('url').value,
+                email: document.getElementById('email').value,
+                tel: document.getElementById('tel').value,
+                category: selectedCategories,
+                inquiry: document.getElementById('inquiry').value,
+                budget: document.getElementById('budget').value,
+                proposal: document.getElementById('proposal').value
+            };
+
+            try {
+                // Fetch APIを使ってGASへPOSTリクエストを送信 (no-corsモードを使用)
+                const response = await fetch(gasUrl, {
+                    method: 'POST',
+                    mode: 'no-cors', // CORSエラーを回避するため
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(postData)
+                });
+
+                // no-corsモードの場合、response.okなどは取得できないため、エラーが出なければ成功とみなす
+                // 送信成功時：完了画面へ切り替え
+                document.getElementById('confirmScreen').style.display = 'none';
+                document.getElementById('completeScreen').style.display = 'block';
+                window.scrollTo(0, 0);
+                
+            } catch (error) {
+                console.error('Error:', error);
+                alert('通信エラーが発生しました。ネットワーク環境をご確認ください。');
+                submitButton.disabled = false;
+                submitButton.textContent = '送信';
+            }
+        }
+        // ▲変更箇所ここまで▲
+    </script>
+
+</body>
+</html>
