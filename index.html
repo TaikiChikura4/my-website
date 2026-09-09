@@ -206,7 +206,7 @@
             opacity: 0;
             animation: fadeDown 1.5s ease forwards;
             animation-delay: 0.3s; /* 画像よりほんの少し遅れてフワッと出します */
-            width: 250px; /* お知らせ欄の幅を確保 */
+            width: 350px; /* ▼変更：PC用にお知らせ欄の横幅を広くしました（250px → 350px）▼ */
         }
 
         /* --- ▼ 追加：お知らせ欄のスタイル ▼ --- */
@@ -229,7 +229,7 @@
             list-style: none;
             padding: 0;
             margin: 0;
-            max-height: 120px; /* 縦幅を制限してスクロール可能に */
+            max-height: 200px; /* ▼変更：PC用に縦幅を少し広くしました（120px → 200px）▼ */
             overflow-y: auto;
         }
 
@@ -347,6 +347,11 @@
                 display: flex;
                 flex-direction: column;
                 gap: 20px;
+            }
+
+            /* ▼ 追加：スマホ版はお知らせの縦幅を元のまま（120px）にする ▼ */
+            .news-list {
+                max-height: 120px;
             }
 
             .social-links {
