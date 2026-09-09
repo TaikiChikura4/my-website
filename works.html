@@ -169,12 +169,30 @@
             font-weight: bold;
             color: #555;
         }
+
+        /* --- ▼ 写真3枚横並び用の追加スタイル ▼ --- */
+        .photo-gallery {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            text-indent: 0; /* リストの字下げ設定をリセット */
+            width: 100%;
+            box-sizing: border-box; /* 追加：パディング等を含めて幅を計算させる */
+        }
+
+        .photo-gallery img {
+            flex: 1; /* 3枚の画像を均等な幅にする */
+            min-width: 0; /* 追加：画像が本来のサイズで枠を押し広げるのを防ぐ */
+            width: 100%;
+            height: auto;
+            object-fit: contain; /* 白い枠からはみ出ないようにしつつ画像全体を表示 */
+        }
     </style>
 </head>
 <body>
 
     <header>
-        <h1 class="title">地藏 大起（チクラ タイキ）MyWebsites</h1>
+        <h1 class="title">地藏 大起（チクラ タイキ）株式会社シーグリーン所属</h1>
         <div class="hamburger" id="hamburger">≡<span class="hamburger-text">メニュー</span></div>
     </header>
 
@@ -202,22 +220,43 @@
                          『段梯子の恐怖』- <span class="role">友人F 役</span><br>
                          『殺人の涯』- <span class="role">男 役</span><br>
                          『卒塔婆小町』- <span class="role">詩人 他多数 役</span><br>
+                         <!-- ▼ 追加：写真を3枚横並びにするコンテナ ▼ -->
+                         <div class="photo-gallery">
+                             <img src="花影朗読夜1.jpg" alt="卒塔婆小町 写真1">
+                             <img src="花影朗読夜2.jpg" alt="卒塔婆小町 写真2">
+                             <img src="花影朗読夜3.jpg" alt="卒塔婆小町 写真3">
+                         </div>
+                         <!-- ▲ 追加ここまで ▲ -->
                     </li>
                     <li>
                         劇団ムーンライト朗読劇、舞台<br>
                          『時計のない村』- <span class="role">金持ち乙 役</span><br>
                          『夏の葬列』- <span class="role">男 役</span><br>
                          『私の街の空気』- <span class="role">タツヤ 役</span><br>
-                         『TWINCLE×3』- <span class="role">西野 役</span>
+                         『TWINCLE×3』- <span class="role">西野 役</span><br>
+                         <!-- ▼ 追加：写真を3枚横並びにするコンテナ ▼ -->
+                         <div class="photo-gallery">
+                             <img src="202606ムーンライト1.jpg" alt="202606ムーンライト 写真1">
+                             <img src="202606ムーンライト2.jpg" alt="202606ムーンライト 写真2">
+                             <img src="202606ムーンライト3.jpg" alt="202606ムーンライト 写真3">
+                         </div>
+                         <!-- ▲ 追加ここまで ▲ -->
                     </li>
                     <li>
                         夏のピカ特朗読劇<br>
                          『コンプライアンス研修』- <span class="role">徳佐 役</span><br>
                          『赤星怪獣の夏休み』- <span class="role">ナレーション,青影 凡太郎 役</span><br>
+                         <!-- ▼ 追加：写真を3枚横並びにするコンテナ ▼ -->
+                         <div class="photo-gallery">
+                             <img src="ピカ特朗読劇1.jpg" alt="ピカ特朗読劇 写真1">
+                             <img src="ピカ特朗読劇2.jpg" alt="ピカ特朗読劇 写真2">
+                             <img src="ピカ特朗読劇3.jpg" alt="ピカ特朗読劇 写真3">
+                         </div>
+                         <!-- ▲ 追加ここまで ▲ -->
                     </li>
 
                 </ul>
-            </div>　
+            </div> 
 
         </div>
     </main>
