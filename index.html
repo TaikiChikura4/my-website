@@ -192,21 +192,79 @@
             animation: fadeDown 1.5s ease forwards;
         }
 
-        /* --- ▼ SNSリンクのスタイル ▼ --- */
-        .social-links {
-            /* 写真の右側にボタンを浮かせる設定 */
+        /* --- ▼ 変更：お知らせ欄とSNSリンクの右側コンテナ ▼ --- */
+        .right-side-contents {
+            /* 写真の右下（下部）にボタン等を浮かせる設定 */
             position: absolute;
-            top: 50%; /* 縦の中央 */
+            bottom: 0; /* 変更：縦の中央から下部に下げました */
             left: 100%; /* 写真の右端に配置 */
-            transform: translateY(-50%); /* 縦方向のズレを補正してぴったり真ん中へ */
-            margin-left: 30px; /* 写真とボタンの隙間 */
+            margin-left: 30px; /* 写真とコンテナの隙間 */
             
             display: flex;
-            flex-direction: column; /* 縦並びにする */
+            flex-direction: column; /* お知らせとSNSを縦並びに */
             gap: 20px;
             opacity: 0;
             animation: fadeDown 1.5s ease forwards;
             animation-delay: 0.3s; /* 画像よりほんの少し遅れてフワッと出します */
+            width: 250px; /* お知らせ欄の幅を確保 */
+        }
+
+        /* --- ▼ 追加：お知らせ欄のスタイル ▼ --- */
+        .news-section {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .news-section h3 {
+            margin: 0 0 15px 0;
+            font-size: 16px;
+            color: #333;
+            border-bottom: 2px solid #333;
+            padding-bottom: 8px;
+        }
+
+        .news-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            max-height: 120px; /* 縦幅を制限してスクロール可能に */
+            overflow-y: auto;
+        }
+
+        .news-list li {
+            margin-bottom: 12px;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        .news-list li:last-child {
+            margin-bottom: 0;
+        }
+
+        .news-date {
+            display: block;
+            font-size: 12px;
+            color: #777;
+            margin-bottom: 3px;
+        }
+
+        .news-list a {
+            text-decoration: none;
+            color: #333;
+            transition: color 0.2s;
+        }
+
+        .news-list a:hover {
+            color: #007BFF;
+        }
+
+        /* --- ▼ SNSリンクのスタイル ▼ --- */
+        .social-links {
+            display: flex;
+            flex-direction: column; /* 縦並びにする */
+            gap: 15px;
         }
 
         .social-links a {
@@ -276,19 +334,24 @@
                 gap: 15px;
                 padding: 0 10px;
                 box-sizing: border-box;
-                margin-bottom: 40px; /* 下（SNSボタン）とのすき間 */
+                margin-bottom: 40px; /* 下（お知らせ等）とのすき間 */
             }
 
-            /* ③ 3番目：SNSボタン（𝕏とInstagram） */
-            .social-links {
+            /* ③ 3番目：右側コンテンツ（お知らせ＋SNSボタン） */
+            .right-side-contents {
                 order: 3; /* 3番目に表示 */
                 position: static; /* 重なり（絶対配置）を完全に解除し、自然な流れに配置 */
-                width: 100%;
-                flex-direction: row; /* 横並びに */
-                justify-content: center; /* 中央寄せ */
-                transform: none; /* PC用のズレ補正をリセット */
+                width: 85vw; /* スマホ時の幅を画像などと揃える */
                 margin-left: 0;
                 margin-bottom: 50px; /* 画面の一番下の余白 */
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .social-links {
+                flex-direction: row; /* スマホではSNSボタンを横並びに */
+                justify-content: center; /* 中央寄せ */
             }
 
             /* スマホ用のフォントサイズ微調整 */
@@ -332,10 +395,39 @@
         <div class="main-content-wrapper">
             <img src="IMG_0479_2.jpg" alt="メイン画像" class="main-image">
             
-            <div class="social-links">
-                <a href="https://x.com/Taiki_Chikura88" target="_blank" rel="noopener">𝕏</a>
-                <a href="https://www.instagram.com/8taiki.333?igsh=Z3Z6NzhqY2tta3dx" target="_blank" rel="noopener">Instagram</a>
+            <!-- ▼ 追加・変更：お知らせ欄とSNSリンクをひとまとめにしました ▼ -->
+            <div class="right-side-contents">
+                
+                <!-- ▼ 追加：お知らせ欄 ▼ -->
+                <div class="news-section">
+                    <h3>お知らせ</h3>
+                    <ul class="news-list">
+                        <li>
+                            <span class="news-date">2026.09.07</span>
+                            <a href="#">10月13日、14日の朗読劇出演が決定いたしました！</a>
+                        </li>
+                        <li>
+                            <span class="news-date">2026.08.21</span>
+                            <a href="#">株式会社シーグリーンに所属いたしました！</a>
+                        </li>
+                        <li>
+                            <span class="news-date">2026.08.15</span>
+                            <a href="#">ピカイチ特撮工作店への出演が決定いたしました！</a>
+                        </li>
+                        <li>
+                            <span class="news-date">2026.07.02</span>
+                            <a href="#">公式HPを開設いたしました！</a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="social-links">
+                    <a href="https://x.com/Taiki_Chikura88" target="_blank" rel="noopener">𝕏</a>
+                    <a href="https://www.instagram.com/8taiki.333?igsh=Z3Z6NzhqY2tta3dx" target="_blank" rel="noopener">Instagram</a>
+                </div>
             </div>
+            <!-- ▲ 変更ここまで ▲ -->
+
         </div>
     </main>
 
