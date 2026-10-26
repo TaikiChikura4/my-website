@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>今後の出演予定 | 地藏 大起 公式HP</title>
+    <style>
+        /* --- 基本設定（共通） --- */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #e5e5e5;
+            overflow: auto; 
+        }
+
+        @keyframes fadeDown {
+            0% { opacity: 0; transform: translateY(-50px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- ヘッダー関連 --- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #e5e5e5;
+            padding: 15px 30px;
+            box-sizing: border-box;
+            z-index: 100;
+        }
+
+        .title {
+            margin: 0;
+            font-size: 24px;
+            color: #333;
+            font-family: "Times New Roman", "ヒラギノ明朝 ProN W6", "Hiragino Mincho ProN", "游明朝", "Yu Mincho", "YuMincho", "MS PMincho", serif;
+            letter-spacing: 2px;
+            line-height: 1.4;
+            opacity: 0;
+            animation: fadeDown 1.5s ease forwards;
+        }
+
+        .hamburger {
+            font-size: 32px;
+            color: #333;
+            cursor: pointer;
+            margin-top: 10px;
+            display: inline-flex; 
+            align-items: center;  
+            gap: 8px;             
+            opacity: 0;
+            transition: opacity 0.8s ease;
+            user-select: none;
+        }
+
+        .hamburger.show {
+            opacity: 1;
+        }
+
+        .hamburger-text {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        /* --- ナビゲーションメニュー --- */
+        .menu {
+            position: absolute;
+            top: 100px;
+            left: 30px;
+            background-color: #ffffff;
+            padding: 20px 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+
+        .menu.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .menu ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .menu ul li {
+            margin-bottom: 15px;
+        }
+
+        .menu ul li:last-child {
+            margin-bottom: 0;
+        }
+
+        .menu ul li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            font-size: 16px;
+            transition: color 0.2s;
+        }
+
+        .menu ul li a:hover {
+            color: #007BFF;
+        }
+
+        /* --- コンテンツ用のスタイル --- */
+        .content-container {
+            max-width: 800px;
+            width: 85%;
+            margin: 150px auto 50px;
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+            opacity: 0;
+            animation: fadeDown 1.5s ease forwards;
+        }
+
+        .content-container h2 {
+            margin-top: 0;
+            border-bottom: 2px solid #333;
+            padding-bottom: 10px;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        /* --- ▼ 今後の出演予定特有のスタイル ▼ --- */
+        .schedule-item {
+            margin-bottom: 45px;
+        }
+
+        .schedule-item h3 {
+            font-size: 20px;
+            color: #333;
+            border-left: 5px solid #555; 
+            padding-left: 12px;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+
+        /* --- ▼ 写真3枚横並び用のスタイル ▼ --- */
+        .photo-gallery {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .photo-gallery img {
+            flex: 1; /* 3枚の画像を均等な幅にする */
+            min-width: 0; /* 画像が本来のサイズで枠を押し広げるのを防ぐ */
+            width: 100%;
+            height: auto;
+            object-fit: contain; /* 白い枠からはみ出ないようにしつつ画像全体を表示 */
+            border-radius: 6px;
+        }
+
+        /* --- ▼ 写真の下の概要エリア用のスタイル ▼ --- */
+        .schedule-overview {
+            background-color: #f8f9fa;
+            padding: 25px;
+            border-radius: 8px;
+            border-left: 6px solid #333;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            font-size: 16px;
+            color: #333;
+            line-height: 1.8;
+        }
+
+        .schedule-overview p {
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        .schedule-overview p:last-child {
+            margin-bottom: 0;
+        }
+
+        .overview-label {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .schedule-overview a {
+            color: #007BFF;
+            text-decoration: underline;
+        }
+
+        .schedule-overview a:hover {
+            color: #0056b3;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1 class="title">地藏 大起（チクラ タイキ）<br>株式会社シーグリーン所属</h1>
+        <div class="hamburger" id="hamburger">≡<span class="hamburger-text">メニュー</span></div>
+    </header>
+
+    <nav class="menu" id="menu">
+        <ul>
+            <li><a href="index.html">トップページへ戻る</a></li>
+            <li><a href="profile.html">プロフィール</a></li>
+            <li><a href="voice.html">ボイスサンプル</a></li>
+            <li><a href="schedule.html">今後の出演予定</a></li>
+            <li><a href="works.html">出演作</a></li>
+            <li><a href="request.html">お仕事依頼</a></li>
+            <li><a href="contact.html">お問い合わせフォーム</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <div class="content-container">
+            <h2>今後の出演予定</h2>
+            
+            <div class="schedule-item">
+                <!-- 公演・作品タイトル（必要に応じて変更・削除してください） -->
+                <h3>劇団ムーンライト 朗読劇公演</h3>
+
+                <!-- ▼ 写真を3枚横並びにするコンテナ ▼ -->
+                <div class="photo-gallery">
+                    <img src="ムーンライト11月光組.jpg" alt="出演予定 写真1">
+                    <img src="ムーンライト11月月組.jpg" alt="出演予定 写真2">
+                </div>
+                <!-- ▲ 写真ここまで ▲ -->
+
+                <!-- ▼ 写真の下に載せる概要エリア ▼ -->
+                <div class="schedule-overview">
+                    <p>
+                        <span class="overview-label">【公演日程】</span><br>
+                        2026年11月13日(金)・14日(土)・15日(日)
+                    </p>
+                    <p>
+                        <span class="overview-label">【会場】</span><br>
+                        劇団ムーンライト荻窪アトリエ
+                    </p>
+                    <p>
+                        <span class="overview-label">【概要・役柄】</span><br>
+                        4本のオムニバス形式の朗読と1本の舞台！<br>
+                        役については来ていただいてからのお楽しみ！<br>
+                        ダブルキャストとなりますので、キャストによって彩りのある演技を堪能あれ！<br>
+                    </p>
+                    <p>
+                        <span class="overview-label">【タイムテーブル・料金・予約】</span><br>
+                        『タイムテーブル』<br>
+                        ＜月組＞<br>
+                        11月13日(金) 20:00<br>
+                        11月14日(土) 17:00<br>
+                        11月15日(日) 12:00<br>
+                        <br>
+                        ＜光組＞<br>
+                        11月14日(土) 14:00 , 20:00<br>
+                        11月15日(土) 15:00<br>
+                        <br>
+                        『料金』<br>
+                          ￥2000<br>
+                         <br>
+                        『予約』<br>
+                        ご予約：<a href="reserve.html" target="_blank" rel="noopener noreferrer">詳細ページはこちら</a>
+                    </p>
+                </div>
+                <!-- ▲ 概要エリアここまで ▲ -->
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const hamburger = document.getElementById('hamburger');
+            const menu = document.getElementById('menu');
+
+            setTimeout(() => {
+                hamburger.classList.add('show');
+            }, 1500);
+
+            // ハンバーガーボタンをクリックした時の処理（開閉）
+            hamburger.addEventListener('click', () => {
+                menu.classList.toggle('open');
+            });
+
+            // 画面のどこかをクリックした時にメニューを閉じる処理
+            document.addEventListener('click', (event) => {
+                // メニューが開いている状態で、クリックした場所が「メニュー本体」でも「ハンバーガーボタン」でもない場合に閉じる
+                if (menu.classList.contains('open') && !menu.contains(event.target) && !hamburger.contains(event.target)) {
+                    menu.classList.remove('open');
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
